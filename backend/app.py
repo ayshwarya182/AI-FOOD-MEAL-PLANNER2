@@ -1,11 +1,16 @@
+
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List
 from uuid import uuid4
 
+# Initialize OpenAI client
+
 
 app = FastAPI(title="AI Food and Meal Planner")
+
 
 # ---------------- CORS ----------------
 
@@ -16,6 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ---------------- FOOD MENU ----------------
 
@@ -279,4 +285,141 @@ def place_order(order: OrderRequest):
         "price": matching_food["price"],
         "meal_type": order.meal_type,
         "day": order.day
+    }
+
+
+# ---------------- AI FOOD CHATBOT ----------------
+
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat")
+def food_chat(request: ChatRequest):
+
+    user_message = request.message.strip().lower()
+
+    if not user_message:
+        return {
+            "reply": "Please enter a question about food or meal planning."
+        }
+
+    # Breakfast recommendations
+    if any(word in user_message for word in [
+        "breakfast", "morning", "morning food"
+    ]):
+        reply = (
+            "Here are some breakfast recommendations! 🍽️\n\n"
+            "1. Idly - ₹30\n"
+            "2. Pongal - ₹40\n"
+            "3. Masala Dosa - ₹50\n"
+            "4. Egg Dosa - ₹70\n\n"
+            "Choose a meal according to your budget and food preference."
+        )
+
+    # Lunch recommendations
+    elif any(word in user_message for word in [
+        "lunch", "afternoon"
+    ]):
+        reply = (
+            "Here are some lunch recommendations! 🍛\n\n"
+            "1. Curd Rice - ₹35\n"
+            "2. Lemon Rice - ₹40\n"
+            "3. Tomato Rice - ₹45\n"
+            "4. Veg Meals - ₹70\n"
+            "5. Chicken Biryani - ₹120\n\n"
+            "Choose according to your budget and preference."
+        )
+
+    # Dinner recommendations
+    elif any(word in user_message for word in [
+        "dinner", "night"
+    ]):
+        reply = (
+            "Here are some dinner recommendations! 🌙\n\n"
+            "1. Dosa - ₹40\n"
+            "2. Chapati - ₹45\n"
+            "3. Uthappam - ₹50\n"
+            "4. Egg Parotta - ₹70\n"
+            "5. Chicken Parotta - ₹100"
+        )
+
+    # Budget recommendations
+    elif any(word in user_message for word in [
+        "budget", "cheap", "affordable", "low cost"
+    ]):
+        reply = (
+            "Here are some affordable food options! 💰\n\n"
+            "• Idly - ₹30\n"
+            "• Upma - ₹30\n"
+            "• Curd Rice - ₹35\n"
+            "• Vada - ₹35\n"
+            "• Lemon Rice - ₹40\n\n"
+            "Tell me your budget to get more suitable suggestions."
+        )
+
+    # Vegetarian recommendations
+    elif any(word in user_message for word in [
+        "veg", "vegetarian"
+    ]):
+        reply = (
+            "Here are some vegetarian options! 🥗\n\n"
+            "• Idly - ₹30\n"
+            "• Pongal - ₹40\n"
+            "• Tomato Rice - ₹45\n"
+            "• Dosa - ₹40\n"
+            "• Veg Meals - ₹70"
+        )
+
+    # Non-vegetarian recommendations
+    elif any(word in user_message for word in [
+        "non veg", "non-veg", "chicken", "egg", "meat"
+    ]):
+        reply = (
+            "Here are some non-vegetarian options! 🍗\n\n"
+            "• Egg Omelette - ₹50\n"
+            "• Egg Dosa - ₹70\n"
+            "• Chicken Rice - ₹90\n"
+            "• Chicken Biryani - ₹120\n"
+            "• Mutton Biryani - ₹150"
+        )
+
+    # Healthy food
+    elif any(word in user_message for word in [
+        "healthy", "health", "nutrition"
+    ]):
+        reply = (
+            "For a balanced meal, consider combining vegetables, "
+            "protein-rich foods, and whole grains. 🥗\n\n"
+            "You can try idly with sambar, vegetable meals, or "
+            "a meal containing rice, vegetables, and a protein source. "
+            "Your best choice depends on your individual dietary needs."
+        )
+
+    # Greetings
+    elif any(word in user_message for word in [
+        "hello", "hi", "hey"
+    ]):
+        reply = (
+            "Hello! 👋 Welcome to your AI Food Assistant.\n\n"
+            "I can help you choose breakfast, lunch, dinner, "
+            "vegetarian meals, non-vegetarian meals, and budget-friendly food.\n\n"
+            "What would you like to eat today?"
+        )
+
+    # Default response
+    else:
+        reply = (
+            "I'm your AI Food Assistant! 🍽️\n\n"
+            "You can ask me questions such as:\n"
+            "• What is my best breakfast in the morning?\n"
+            "• Suggest a lunch under ₹100.\n"
+            "• Recommend vegetarian food.\n"
+            "• What can I eat for dinner?\n"
+            "• Suggest healthy food.\n\n"
+            "What would you like to know?"
+        )
+
+    return {
+        "reply": reply
     }

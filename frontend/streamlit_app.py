@@ -1,6 +1,8 @@
+
 import streamlit as st
 import requests
 from pathlib import Path
+
 
 # =====================================================
 # PAGE CONFIGURATION
@@ -16,7 +18,7 @@ st.set_page_config(
 # BACKEND URL
 # =====================================================
 
-BACKEND_URL = "http://127.0.0.1:8000" 
+BACKEND_URL = "https://ai-meal-planner1.onrender.com"
 
 
 # =====================================================
@@ -140,7 +142,7 @@ if st.button(
         response = requests.post(
             f"{BACKEND_URL}/generate-meal-plan",
             json=request_data,
-            timeout=20
+            timeout=30
         )
 
         result = response.json()
@@ -177,11 +179,15 @@ if st.button(
                 result.get("detail", response.text)
             )
 
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as e:
+
+        st.error("Backend Connection Error")
+        st.code(str(e))
+
+    except requests.exceptions.Timeout:
 
         st.error(
-            "Cannot connect to FastAPI. "
-            "Start the backend on port 8000."
+            "Backend request timed out. Please try again."
         )
 
     except Exception as e:
@@ -362,7 +368,7 @@ if st.session_state.selected_food:
                     response = requests.post(
                         f"{BACKEND_URL}/order",
                         json=order_data,
-                        timeout=20
+                        timeout=30
                     )
 
                     result = response.json()
@@ -395,11 +401,15 @@ if st.session_state.selected_food:
                             )
                         )
 
-                except requests.exceptions.ConnectionError:
+                except requests.exceptions.ConnectionError as e:
+
+                    st.error("Backend Connection Error")
+                    st.code(str(e))
+
+                except requests.exceptions.Timeout:
 
                     st.error(
-                        "Cannot connect to backend. "
-                        "Make sure FastAPI is running."
+                        "Order request timed out. Please try again."
                     )
 
                 except Exception as e:
