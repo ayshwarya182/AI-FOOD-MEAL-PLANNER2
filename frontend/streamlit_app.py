@@ -1,4 +1,3 @@
-
 import streamlit as st
 import requests
 from pathlib import Path
@@ -18,7 +17,7 @@ st.set_page_config(
 # BACKEND URL
 # =====================================================
 
-BACKEND_URL = "https://ai-meal-planner-1-johh.onrender.com"
+BACKEND_URL = "https://ai-meal-planner-3-8qlb.onrender.com"
 
 
 # =====================================================
@@ -118,7 +117,7 @@ with col2:
 with col3:
     preference = st.selectbox(
         "Food Preference",
-        ["Veg", "Non-Veg", "Both"]
+        ["Veg", "Non-Veg"]
     )
 
 
@@ -248,6 +247,16 @@ if st.session_state.meal_plan:
                 st.write(f"**{food['name']}**")
                 st.write(f"Price: ₹{food['price']}")
 
+                # ADDED: CALORIES AND PROTEIN
+
+                st.write(
+                    f"🔥 Calories: {food.get('calories', 'N/A')} kcal"
+                )
+
+                st.write(
+                    f"💪 Protein: {food.get('protein', 'N/A')} g"
+                )
+
                 if st.button(
                     "Order",
                     key=f"order_{day_number}_{meal_type}"
@@ -257,6 +266,20 @@ if st.session_state.meal_plan:
                     st.session_state.order_result = None
 
                     st.rerun()
+
+        # DAILY NUTRITION TOTAL
+
+        st.subheader("Daily Nutrition Summary")
+
+        st.write(
+            f"🔥 Total Calories: "
+            f"{day_plan.get('total_calories', 'N/A')} kcal"
+        )
+
+        st.write(
+            f"💪 Total Protein: "
+            f"{day_plan.get('total_protein', 'N/A')} g"
+        )
 
         st.divider()
 
@@ -295,10 +318,17 @@ if st.session_state.selected_food:
         st.write(f"Meal: {food['type']}")
         st.write(f"Day: {food['day']}")
 
-    with right:
+        # ADDED: NUTRITION DETAILS
 
-        # Use a form to avoid accidental reruns
-        # when entering customer details.
+        st.write(
+            f"🔥 Calories: {food.get('calories', 'N/A')} kcal"
+        )
+
+        st.write(
+            f"💪 Protein: {food.get('protein', 'N/A')} g"
+        )
+
+    with right:
 
         with st.form("customer_order_form"):
 
@@ -344,20 +374,13 @@ if st.session_state.selected_food:
 
             else:
 
-                # =========================================
-                # CORRECT ORDER REQUEST
-                # =========================================
-
                 order_data = {
                     "name": customer_name.strip(),
                     "phone": customer_phone.strip(),
                     "address": customer_address.strip(),
-
-                    # Send the food name as a string
                     "meals": [
                         food["name"]
                     ],
-
                     "price": int(food["price"]),
                     "meal_type": food["type"],
                     "day": int(food["day"])
@@ -456,3 +479,4 @@ if st.session_state.order_result:
         st.session_state.order_result = None
 
         st.rerun()
+
