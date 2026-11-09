@@ -26,69 +26,68 @@ app.add_middleware(
 # ---------------- FOOD MENU ----------------
 
 VEG_BREAKFAST = [
-    {"name": "Idly", "price": 30},
-    {"name": "Masala Dosa", "price": 50},
-    {"name": "Pongal", "price": 40},
-    {"name": "Poori", "price": 45},
-    {"name": "Vada", "price": 35},
-    {"name": "Rava Dosa", "price": 50},
-    {"name": "Upma", "price": 30},
-    {"name": "Ven Pongal", "price": 40},
+    {"name": "Idly", "price": 30 ,"calories":5,"protein" :2},
+    {"name": "Masala Dosa", "price": 50 ,"calories":10,"protein":5},
+    {"name": "Pongal", "price": 40,"calories": 12,"protein":8},
+    {"name": "Poori", "price": 45,"calories": 15,"protein":6},
+    {"name": "Vada", "price": 35,"calories": 10,"protein":4},
+    {"name": "Rava Dosa", "price": 50,"calories": 20,"protein":7},
+    {"name": "Upma", "price": 30,"calories": 18,"protein":6},
 ]
 
 NONVEG_BREAKFAST = [
-    {"name": "Egg Dosa", "price": 70},
-    {"name": "Egg Omelette", "price": 50},
-    {"name": "Chicken Dosa", "price": 90},
-    {"name": "Egg Parotta", "price": 70},
-    {"name": "Chicken Sandwich", "price": 80},
-    {"name": "Chicken Roll", "price": 90},
-    {"name": "Egg Kothu Parotta", "price": 80},
-    {"name": "Chicken Kothu Parotta", "price": 100},
+    {"name": "Egg Dosa", "price": 70,"calories":15,"protein":8},
+    {"name": "Egg Omelette", "price": 50,"calories":12,"protein":6},
+    {"name": "Chicken Dosa", "price": 90,"calories":10,"protein":5},
+    {"name": "Egg Parotta", "price": 70,"calories":15,"protein":6},
+    {"name": "Chicken Sandwich", "price": 80,"calories":20,"protein":8},
+    {"name": "Chicken Roll", "price": 90,"calories":25,"protein":10},
+    {"name": "Egg Kothu Parotta", "price": 80,"calories":18,"protein":7},
+    {"name": "Chicken Kothu Parotta", "price": 100,"calories":22,"protein":9},
 ]
 
 VEG_LUNCH = [
-    {"name": "South Indian Meals", "price": 70},
-    {"name": "Tomato Rice", "price": 45},
-    {"name": "Lemon Rice", "price": 40},
-    {"name": "Curd Rice", "price": 35},
-    {"name": "Sambar Rice", "price": 50},
-    {"name": "Coconut Rice", "price": 45},
-    {"name": "Veg Biryani", "price": 80},
-    {"name": "Veg Pulao", "price": 70},
+    {"name": "South Indian Meals", "price": 70,"calories":20,"protein":8},
+    {"name": "Tomato Rice", "price": 45,"calories":15,"protein":6},
+    {"name": "Lemon Rice", "price": 40,"calories":12,"protein":5},
+    {"name": "Curd Rice", "price": 35,"calories":10,"protein":4},
+    {"name": "Sambar Rice", "price": 50,"calories":18,"protein":7},
+    {"name": "Coconut Rice", "price": 45,"calories":15,"protein":6},
+    {"name": "Veg Biryani", "price": 80,"calories":25,"protein":10},
+    {"name": "Veg Pulao", "price": 70,"calories":20,"protein":8},
 ]
 
 NONVEG_LUNCH = [
-    {"name": "Chicken Biryani", "price": 120},
-    {"name": "Chicken Rice", "price": 90},
-    {"name": "Chicken Meals", "price": 110},
-    {"name": "Mutton Biryani", "price": 150},
-    {"name": "Fish Meals", "price": 130},
-    {"name": "Fish Biryani", "price": 140},
-    {"name": "Mutton Meals", "price": 150},
-    {"name": "Chicken Fried Rice", "price": 100},
+    {"name": "Chicken Biryani", "price": 120,"calories":30,"protein":12},
+    {"name": "Chicken Rice", "price": 90,"calories":25,"protein":10},
+    {"name": "Chicken Meals", "price": 110,"calories":28,"protein":11},
+    {"name": "Mutton Biryani", "price": 150,"calories":35,"protein":14},
+    {"name": "Fish Meals", "price": 130,"calories":22,"protein":9},
+    {"name": "Fish Biryani", "price": 140,"calories":25,"protein":10},
+    {"name": "Mutton Meals", "price": 150,"calories":30,"protein":12},
+    {"name": "Chicken Fried Rice", "price": 100,"calories":20,"protein":8},
 ]
 
 VEG_DINNER = [
-    {"name": "Dosa", "price": 40},
-    {"name": "Uthappam", "price": 50},
-    {"name": "Chapati", "price": 45},
-    {"name": "Appam", "price": 50},
-    {"name": "Idiyappam", "price": 55},
-    {"name": "Parotta", "price": 50},
-    {"name": "Paniyaram", "price": 45},
-    {"name": "Vegetable Kothu Parotta", "price": 70},
+    {"name": "Dosa", "price": 40,"calories":10,"protein":4},
+    {"name": "Uthappam", "price": 50,"calories":15,"protein":6},
+    {"name": "Chapati", "price": 45,"calories":12,"protein":5},
+    {"name": "Appam", "price": 50,"calories":15,"protein":6},
+    {"name": "Idiyappam", "price": 55,"calories":18,"protein":7},
+    {"name": "Parotta", "price": 50,"calories":15,"protein":6},
+    {"name": "Paniyaram", "price": 45,"calories":12,"protein":5},
+    {"name": "Vegetable Kothu Parotta", "price": 70,"calories":18,"protein":7}
 ]
 
 NONVEG_DINNER = [
-    {"name": "Chicken Parotta", "price": 100},
-    {"name": "Chicken Kothu Parotta", "price": 110},
-    {"name": "Egg Parotta", "price": 70},
-    {"name": "Chicken Dosa", "price": 90},
-    {"name": "Chicken Fried Rice", "price": 100},
-    {"name": "Chicken Noodles", "price": 100},
-    {"name": "Fish Fry Parotta", "price": 130},
-    {"name": "Mutton Parotta", "price": 140},
+    {"name": "Chicken Parotta", "price": 100,"calories":20,"protein":8},
+    {"name": "Chicken Kothu Parotta", "price": 110,"calories":22,"protein":9},
+    {"name": "Egg Parotta", "price": 70,"calories":15,"protein":6},
+    {"name": "Chicken Dosa", "price": 90,"calories":25,"protein":10},
+    {"name": "Chicken Fried Rice", "price": 100,"calories":20,"protein":8},
+    {"name": "Chicken Noodles", "price": 100,"calories":25,"protein":10},
+    {"name": "Fish Fry Parotta", "price": 130,"calories":30,"protein":12},
+    {"name": "Mutton Parotta", "price": 140,"calories":35,"protein":14},
 ]
 
 
@@ -134,16 +133,11 @@ def get_food_lists(preference):
     if preference == "Non-Veg":
         return NONVEG_BREAKFAST, NONVEG_LUNCH, NONVEG_DINNER
 
-    if preference == "Both":
-        return (
-            VEG_BREAKFAST + NONVEG_BREAKFAST,
-            VEG_LUNCH + NONVEG_LUNCH,
-            VEG_DINNER + NONVEG_DINNER
-        )
+    
 
     raise HTTPException(
         status_code=400,
-        detail="Choose Veg, Non-Veg or Both."
+        detail="Choose Veg, Non-Veg "
     )
 
 
